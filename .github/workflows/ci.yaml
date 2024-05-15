@@ -17,7 +17,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: $GITHUB_REPOSITORY_OWNER/shinyproxy
+          images: ${{ github.GITHUB_REPOSITORY_OWNER/shinyproxy }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -36,7 +36,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ steps.docker_meta.outputs.tags }}
-            ${{ github.ref == 'refs/heads/main' && '$GITHUB_REPOSITORY_OWNER/shinyproxy:latest' || '' }}
+            ${{ github.ref == 'refs/heads/main' && '${{ github.GITHUB_REPOSITORY_OWNER/shinyproxy:latest' || '' }}
           labels: ${{ steps.docker_meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
