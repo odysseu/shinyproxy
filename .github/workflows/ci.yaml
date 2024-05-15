@@ -36,7 +36,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ steps.docker_meta.outputs.tags }}
-            ${{ github.ref == 'refs/heads/main' && '${{ github.repository_owner }}/shinyproxy:latest' || '' }}
+            ${{ github.ref == 'refs/heads/main' && "${{ github.repository_owner }}/shinyproxy:latest" || '' }}
           labels: ${{ steps.docker_meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
